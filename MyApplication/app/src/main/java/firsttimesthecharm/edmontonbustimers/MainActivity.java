@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button jsonTest;
     private Button backendTest;
+    private Button addBus;
 
 
     @Override
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         jsonTest = (Button)findViewById(R.id.button_jsonTest);
         backendTest = (Button)findViewById(R.id.button_backendTest);
+        addBus = (Button)findViewById(R.id.button_addBus);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 launch_backend();
+            }
+        });
+
+        addBus.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
             }
         });
     }
@@ -82,4 +90,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, backendActivity.class);
         startActivity(intent);
     }
+    
 }
