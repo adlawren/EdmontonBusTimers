@@ -30,10 +30,8 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button newBus;
     private userRoutes myRoutes;
     private ListView lv;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,21 +40,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        newBus = (Button) findViewById(R.id.button_newBus);
         lv = (ListView)findViewById(R.id.listView_activebusList);
 
         myRoutes = new userRoutes();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        newBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 launch_addIntent();
