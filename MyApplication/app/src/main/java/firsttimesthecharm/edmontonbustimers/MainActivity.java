@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private Button newBus;
     private Button commitBus;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        newBus = (Button)findViewById(R.id.button_newBus);
-        commitBus = (Button)findViewById(R.id.button_commitBus);
+        newBus = (Button) findViewById(R.id.button_newBus);
+        commitBus = (Button) findViewById(R.id.button_commitBus);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -37,18 +38,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        newBus.setOnClickListener(new View.OnClickListener(){
+        newBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
             }
         });
 
-        commitBus.setOnClickListener(new View.OnClickListener(){
+        commitBus.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
+
             }
         });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,6 +76,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
 }
