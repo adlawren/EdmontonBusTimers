@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        lv = (ListView)findViewById(R.id.listView_activebusList);
+        lv = (ListView) findViewById(R.id.listView_activebusList);
 
         myRoutes = new userRoutes();
 
@@ -52,21 +52,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
-        newBus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launch_addIntent();
-            }
-        });
-=======
         final ArrayList<Result> my_results = new ArrayList<Result>();
 
         final DataEdmontonRequestHandler DERH_handler = new DataEdmontonRequestHandler();
         // final CustomAdapter adapter = new CustomAdapter(this, new ArrayList<Result>());
         final CustomAdapter adapter = new CustomAdapter(this, my_results);
         lv.setAdapter(adapter);
->>>>>>> 691b52336cde1df2cd2a791cb461d7dab8d46303
 
         final Handler handler = new Handler();
         Timer timer = new Timer();
@@ -82,29 +73,23 @@ public class MainActivity extends AppCompatActivity {
                                 public void callback(ArrayList<Result> list) {
                                     System.out.println("[Callback]: List size: " + list.size());
                                     my_results.clear();
-                                    for(Result r : findNearestResult(list)) {
+                                    for (Result r : findNearestResult(list)) {
                                         my_results.add(r);
                                     }
                                     adapter.notifyDataSetChanged();
                                 }
                             }, myRoutes.get_routes());
-                        }
-                        catch (Exception e) {
+                        } catch (Exception e) {
                             //TODO: catch block
                         }
                     }
                 });
             }
         };
-<<<<<<< HEAD
-        //timer.schedule(doAsynchronousTask, 0, 5000);
-=======
 //        timer.schedule(doAsynchronousTask, 0, 5000*20);
         timer.schedule(doAsynchronousTask, 0, 5000);
->>>>>>> 691b52336cde1df2cd2a791cb461d7dab8d46303
+
     }
-
-
 
 
     @Override
@@ -137,29 +122,18 @@ public class MainActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
- private void launch_addIntent(){
-     Intent intent = new Intent(this, newBus_Activity.class);
-     startActivityForResult(intent, 1);
- }
 
-<<<<<<< HEAD
-=======
     private void launch_addIntent() {
         Intent intent = new Intent(this, newBus_Activity.class);
         startActivityForResult(intent, 1);
     }
 
->>>>>>> 691b52336cde1df2cd2a791cb461d7dab8d46303
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == RESULT_OK && requestCode == 1 && data != null) {
+        if (resultCode == RESULT_OK && requestCode == 1 && data != null) {
             int busStop = data.getIntExtra("busStop", 0);
             int busNum = data.getIntExtra("busNum", 0);
-<<<<<<< HEAD
-            showToast(String.valueOf(busStop) + " " + String.valueOf(busNum));
-        }
-    }
-=======
+
             myRoutes.addRoute(new Route(busStop, busNum));
         }
     }
@@ -167,14 +141,14 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Result> findNearestResult(ArrayList<Result> results) {
         ArrayList<Result> finished = new ArrayList<Result>();
 
-        for(Route ur : myRoutes.get_routes()) {
+        for (Route ur : myRoutes.get_routes()) {
 
             ArrayList<Result> temp = new ArrayList<Result>();
 
-            for(Result r : results) {
+            for (Result r : results) {
 
 //                System.out.println(ur.get_busNum() + " " + ur.get_busStop() + " " + r.get_BusStop() + " " + r.get_BusNum());
-                if(ur.get_busStop().equals(r.get_BusStop()) &&
+                if (ur.get_busStop().equals(r.get_BusStop()) &&
                         ur.get_busNum().equals(r.get_BusNum())) {
                     temp.add(r);
                 }
@@ -183,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             Collections.sort(temp, new Comparator<Result>() {
                 @Override
                 public int compare(Result result, Result t1) {
-                    if(result.get_time().before(t1.get_time())) {
+                    if (result.get_time().before(t1.get_time())) {
                         return -1;
                     } else if (result.get_time().equals(t1.get_time())) {
                         return 0;
@@ -219,7 +193,5 @@ public class MainActivity extends AppCompatActivity {
 
         return finished;
     }
-
->>>>>>> 691b52336cde1df2cd2a791cb461d7dab8d46303
 }
 
