@@ -34,15 +34,6 @@ public class newBus_Activity extends AppCompatActivity {
         userBus = (EditText) findViewById(R.id.editText_userBus);
         userStop = (EditText) findViewById(R.id.editText_userStop);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         commitBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

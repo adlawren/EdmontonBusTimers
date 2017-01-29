@@ -44,6 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editText_userStop"
         android:layout_centerHorizontal="true"
+        android:backgroundTint="#1b3667"
+        android:textColor="#FFFFFF"
         android:id="@+id/button_commitBus"/>
 
 </RelativeLayout>
