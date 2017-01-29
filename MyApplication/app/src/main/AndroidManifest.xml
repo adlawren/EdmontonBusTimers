@@ -29,7 +29,7 @@
             android:label="@string/title_activity_backend"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".addBus_activity"
+            android:name=".newBus_Activity"
             android:label="@string/title_activity_add_bus_activity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

@@ -15,7 +15,6 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
 
     private Button newBus;
-    private Button commitBus;
 
 
     @Override
@@ -26,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         newBus = (Button) findViewById(R.id.button_newBus);
-        commitBus = (Button) findViewById(R.id.button_commitBus);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -45,12 +43,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        commitBus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
 
