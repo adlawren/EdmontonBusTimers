@@ -18,6 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".jsonTestingActivity"
+            android:label="@string/title_activity_json_testing"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".backendActivity"
+            android:label="@string/title_activity_backend"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
