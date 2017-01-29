@@ -34,22 +34,21 @@ public class newBus_Activity extends AppCompatActivity {
         userBus = (EditText) findViewById(R.id.editText_userBus);
         userStop = (EditText) findViewById(R.id.editText_userStop);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         commitBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent returnIntent = new Intent();
-                if (busNumber == 0 || stopNumber == 0) {
-                    showToast("Field's empty.");
+
+                if(userBus.getText().toString().trim().equals("") ||
+                        userStop.getText().toString().trim().equals("")) {
+                    showToast("Field is empty!");
                 } else {
+                    busNumber = Integer.valueOf(userBus.getText().toString());
+                    stopNumber = Integer.valueOf(userStop.getText().toString());
+                }
+                if(busNumber == 0 || stopNumber == 0) {
+                    showToast("Fields cannot be zero..");
+                } else {
+                    Intent returnIntent = new Intent();
                     returnIntent.putExtra("busNum", busNumber);
                     returnIntent.putExtra("busStop", stopNumber);
                     setResult(RESULT_OK, returnIntent);
@@ -63,8 +62,18 @@ public class newBus_Activity extends AppCompatActivity {
             public boolean onEditorAction(TextView textView, int actionID, KeyEvent keyEvent) {
                 boolean handled = false;
                 if (actionID == EditorInfo.IME_ACTION_NEXT) {
-                    busNumber = Integer.valueOf(userBus.getText().toString());
-                    return true;
+                    return false;
+                }
+                return true;
+            }
+        });
+
+        userStop.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionID, KeyEvent keyEvent) {
+                boolean handled = false;
+                if (actionID == EditorInfo.IME_ACTION_DONE) {
+                    return false;
                 }
                 return false;
             }
@@ -80,8 +89,8 @@ public class newBus_Activity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
+    
     public void showToast(String msg) {
         Context context = getApplicationContext();
         CharSequence text = msg;

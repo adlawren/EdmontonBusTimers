@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.impl.client.SystemDefaultCredentialsProvider;
 
 /**
  * Created by adlawren on 28/01/17.
@@ -38,23 +39,31 @@ class DataEdmontonModel {
 
 public class DataEdmontonRequestHandler {
     private String buildRelativeUrl(ArrayList<Route> routeList) {
-        String relativeUrl = new String("resource/xeux-ngrz.json");
+        String relativeUrl = new String(
+                "resource/xeux-ngrz.json?$query=SELECT%20departure_time,%20stop_headsign,%20stop_id%20WHERE%20");
 
-        for (Route route : routeList) {
-            // ...
+        for (int i = 0; i < routeList.size(); i++) {
+            if (i == 0) {
+                relativeUrl += "(stop_headsign%20like%20%27" + routeList.get(i).get_busNum()
+                        + "%20%25%27%20AND%20stop_id=" + routeList.get(i).get_busStop() + ")";
+            }
+            else {
+                relativeUrl += "%20OR%20(stop_headsign%20like%20%27" + routeList.get(i).get_busNum()
+                        + "%20%25%27%20AND%20stop_id=" + routeList.get(i).get_busStop() + ")";
+            }
         }
 
         return relativeUrl;
     }
 
-    void GetDataModels(final IObserver<ArrayList<DataEdmontonModel>> observer, ArrayList<Route> routeList) {
+    void GetDataModels(final IObserver<ArrayList<Result>> observer, ArrayList<Route> routeList) {
         RequestParams requestParams = new RequestParams();
-        requestParams.put("$limit","5000");
         requestParams.put("$$app_token", "4C0rE9eFHXRU5cQdcR15gI1PJ");
 
         final ArrayList<DataEdmontonModel> dataEdmontonModels = new ArrayList<>();
 
         String relativeUrl = buildRelativeUrl(routeList);
+        System.err.println("[EBT test] " + relativeUrl);
 
         DataEdmontonRestClient.get(relativeUrl, requestParams, new AsyncHttpResponseHandler() {
             @Override
@@ -64,10 +73,10 @@ public class DataEdmontonRequestHandler {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] response) {
-                // called when response HTTP status is "200 OK"
-                System.err.println("[EBT Tag]: Response OK");
-                System.err.println("[EBT Tag]: Response length: " + response.length);
-                System.err.println("[EBT Tag]: Response: " + new String(response));
+                // called when response HTTP status is "200 OK" (for debugging)
+//                System.err.println("[EBT Tag]: Response OK");
+//                System.err.println("[EBT Tag]: Response length: " + response.length);
+//                System.err.println("[EBT Tag]: Response: " + new String(response));
 
                 String json = new String(response);
 
@@ -87,7 +96,7 @@ public class DataEdmontonRequestHandler {
                             e.printStackTrace();
                         }
 
-                        System.err.println("[EBT Tag]: Next list item: " + dataEdmontonModel.arrival_time_2);
+//                        System.err.println("[EBT Tag]: Next list item: " + dataEdmontonModel.departure_time);
 
                         dataEdmontonModels.add(dataEdmontonModel);
                         //make the result object
@@ -96,13 +105,20 @@ public class DataEdmontonRequestHandler {
                     e.printStackTrace();
                 }
 
-                observer.callback(dataEdmontonModels);
-                //oversver.callback(resultarray)
+                ArrayList<Result> results = new ArrayList<Result>();
+                for (DataEdmontonModel model : dataEdmontonModels) {
+                    String[] temp = model.stop_headsign.split(" ");
+                    results.add(new Result(String.valueOf(model.stop_id), temp[0],
+                            model.departure_time, temp[1]));
+                }
+
+                observer.callback(results);
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
                 // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                System.err.println(statusCode + new String(errorResponse));
             }
 
             @Override
@@ -123,3 +139,15 @@ public class DataEdmontonRequestHandler {
 //        System.err.println("[EBT Tag]: List size:    " + list.size());
 //        }
 //        });
+
+// At end of MainActivity.onCreate for testing:
+//    ArrayList<Route> testList = new ArrayList<Route>();
+//testList.add(new Route(2869, 52));
+//        testList.add(new Route(5050, 3));
+//        DataEdmontonRequestHandler handler = new DataEdmontonRequestHandler();
+//        handler.GetDataModels(new IObserver<ArrayList<Result>>() {
+//@Override
+//public void callback(ArrayList<Result> list) {
+//        System.err.println("[EBT Tag]: List size:    " + list.size());
+//        }
+//        }, testList);

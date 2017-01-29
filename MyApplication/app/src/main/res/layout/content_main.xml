@@ -13,27 +13,18 @@
     tools:context="firsttimesthecharm.edmontonbustimers.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
+    <ImageView
         android:text="LOGO"
         android:paddingTop="30dp"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView_LOGO"/>
-
-    <Button
-        android:text="New Bus"
-        android:layout_below="@+id/textView_LOGO"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:id="@+id/button_newBus"/>
+        android:id="@+id/imageView_LOGO"/>
 
     <TextView
         android:text="Bus"
-        android:layout_below="@+id/button_newBus"
+        android:layout_below="@+id/imageView_LOGO"
+        android:layout_marginTop="85dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/textView_Stop"
@@ -42,7 +33,8 @@
 
     <TextView
         android:text="Stop"
-        android:layout_below="@+id/button_newBus"
+        android:layout_below="@+id/imageView_LOGO"
+        android:layout_marginTop="85dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -50,7 +42,8 @@
 
     <TextView
         android:text="ETA"
-        android:layout_below="@+id/button_newBus"
+        android:layout_below="@+id/imageView_LOGO"
+        android:layout_marginTop="85dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/textView_Stop"
