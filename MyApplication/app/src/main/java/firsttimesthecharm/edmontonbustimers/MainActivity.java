@@ -13,8 +13,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button newBus;
     private userRoutes myRoutes;
+    private ListView lv;
 
 
     @Override
@@ -33,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         newBus = (Button) findViewById(R.id.button_newBus);
+        lv = (ListView)findViewById(R.id.listView_activebusList);
 
         myRoutes = new userRoutes();
 
@@ -52,6 +63,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        final ArrayList<Result> my_results = new ArrayList<Result>();
+
+        final DataEdmontonRequestHandler DERH_handler = new DataEdmontonRequestHandler();
+        // final CustomAdapter adapter = new CustomAdapter(this, new ArrayList<Result>());
+        final CustomAdapter adapter = new CustomAdapter(this, my_results);
+        lv.setAdapter(adapter);
+
         final Handler handler = new Handler();
         Timer timer = new Timer();
         TimerTask doAsynchronousTask = new TimerTask() {
@@ -61,7 +79,17 @@ public class MainActivity extends AppCompatActivity {
                     @SuppressWarnings("unchecked")
                     public void run() {
                         try {
-                            showToast("TIMER TIME");
+                            DERH_handler.GetDataModels(new IObserver<ArrayList<Result>>() {
+                                @Override
+                                public void callback(ArrayList<Result> list) {
+                                    System.out.println("[Callback]: List size: " + list.size());
+                                    my_results.clear();
+                                    for(Result r : findNearestResult(list)) {
+                                        my_results.add(r);
+                                    }
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }, myRoutes.get_routes());
                         }
                         catch (Exception e) {
                             //TODO: catch block
@@ -70,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         };
-        //timer.schedule(doAsynchronousTask, 0, 5000);
+//        timer.schedule(doAsynchronousTask, 0, 5000*20);
+        timer.schedule(doAsynchronousTask, 0, 5000);
     }
 
 
@@ -121,12 +150,40 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private ArrayList<Result> findNearestResult(ArrayList<Result> results) {
+        ArrayList<Result> finished = new ArrayList<Result>();
+
+        for(Route ur : myRoutes.get_routes()) {
+
+            ArrayList<Result> temp = new ArrayList<Result>();
+
+            for(Result r : results) {
+
+                System.out.println(ur.get_busNum() + " " + ur.get_busStop() + " " + r.get_BusStop() + " " + r.get_BusNum());
+                if(ur.get_busStop().equals(r.get_BusStop()) &&
+                        ur.get_busNum().equals(r.get_BusNum())) {
+                    temp.add(r);
+                }
+            }
+
+            Collections.sort(temp, new Comparator<Result>() {
+                @Override
+                public int compare(Result result, Result t1) {
+                    if(result.get_time().before(t1.get_time())) {
+                        return -1;
+                    } else if (result.get_time().equals(t1.get_time())) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
+
+            finished.add(temp.get(0));
+        }
+
+        return finished;
+    }
+
 }
 
-//    DataEdmontonRequestHandler handler = new DataEdmontonRequestHandler();
-//handler.GetDataModels(new IObserver<ArrayList<DataEdmontonModel>>() {
-//@Override
-//public void callback(ArrayList<DataEdmontonModel> list) {
-//        System.err.println("[EBT Tag]: List size:    " + list.size());
-//        }
-//        });

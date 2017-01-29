@@ -107,8 +107,9 @@ public class DataEdmontonRequestHandler {
 
                 ArrayList<Result> results = new ArrayList<Result>();
                 for (DataEdmontonModel model : dataEdmontonModels) {
-                    results.add(new Result(String.valueOf(model.stop_id), model.stop_headsign,
-                            model.departure_time));
+                    String[] temp = model.stop_headsign.split(" ");
+                    results.add(new Result(String.valueOf(model.stop_id), temp[0],
+                            model.departure_time, temp[1]));
                 }
 
                 observer.callback(results);
