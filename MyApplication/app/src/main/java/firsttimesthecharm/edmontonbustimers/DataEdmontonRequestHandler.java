@@ -99,6 +99,7 @@ public class DataEdmontonRequestHandler {
                         System.err.println("[EBT Tag]: Next list item: " + dataEdmontonModel.departure_time);
 
                         dataEdmontonModels.add(dataEdmontonModel);
+                        //make the result object
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
