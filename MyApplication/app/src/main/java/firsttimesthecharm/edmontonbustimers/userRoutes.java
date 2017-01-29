@@ -1,5 +1,6 @@
 package firsttimesthecharm.edmontonbustimers;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -25,6 +26,10 @@ public class userRoutes {
         if(userRoutes.contains(route)) {
             userRoutes.remove(route);
         }
+    }
+
+    public ArrayList<Route> get_routes() {
+        return userRoutes;
     }
 
 }

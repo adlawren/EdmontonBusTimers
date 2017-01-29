@@ -22,6 +22,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     private Button newBus;
+    private userRoutes myRoutes;
 
 
     @Override
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         newBus = (Button) findViewById(R.id.button_newBus);
+
+        myRoutes = new userRoutes();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         newBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                launch_addIntent();
             }
         });
 
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         };
-        timer.schedule(doAsynchronousTask, 0, 5000);
+        //timer.schedule(doAsynchronousTask, 0, 5000);
     }
 
 
@@ -104,4 +107,26 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
     }
 
+    private void launch_addIntent() {
+        Intent intent = new Intent(this, newBus_Activity.class);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == RESULT_OK && requestCode == 1 && data != null) {
+            int busStop = data.getIntExtra("busStop", 0);
+            int busNum = data.getIntExtra("busNum", 0);
+            myRoutes.addRoute(new Route(busStop, busNum));
+        }
+    }
+
 }
+
+//    DataEdmontonRequestHandler handler = new DataEdmontonRequestHandler();
+//handler.GetDataModels(new IObserver<ArrayList<DataEdmontonModel>>() {
+//@Override
+//public void callback(ArrayList<DataEdmontonModel> list) {
+//        System.err.println("[EBT Tag]: List size:    " + list.size());
+//        }
+//        });
