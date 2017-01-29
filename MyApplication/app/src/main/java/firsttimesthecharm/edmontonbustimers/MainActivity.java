@@ -13,11 +13,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button jsonTest;
-    private Button backendTest;
     private Button addBus;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        jsonTest = (Button)findViewById(R.id.button_jsonTest);
-        backendTest = (Button)findViewById(R.id.button_backendTest);
         addBus = (Button)findViewById(R.id.button_addBus);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -38,25 +32,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        jsonTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launch_jsonTest();
-            }
-        });
-
-        backendTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launch_backend();
-            }
-        });
-
         addBus.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
             }
         });
+    }
+
+    private void ever_minute() {
     }
 
     @Override
