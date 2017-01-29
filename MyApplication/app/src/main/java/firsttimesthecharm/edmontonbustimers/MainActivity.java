@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         newBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                launch_addIntent();
             }
         });
 
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         };
-        timer.schedule(doAsynchronousTask, 0, 5000);
+        //timer.schedule(doAsynchronousTask, 0, 5000);
     }
 
 
@@ -103,5 +103,17 @@ public class MainActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
+ private void launch_addIntent(){
+     Intent intent = new Intent(this, newBus_Activity.class);
+     startActivityForResult(intent, 1);
+ }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == RESULT_OK && requestCode == 1 && data != null) {
+            int busStop = data.getIntExtra("busStop", 0);
+            int busNum = data.getIntExtra("busNum", 0);
+            showToast(String.valueOf(busStop) + " " + String.valueOf(busNum));
+        }
+    }
 }
