@@ -13,7 +13,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button addBus;
+    private Button newBus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        addBus = (Button)findViewById(R.id.button_addBus);
+        newBus = (Button)findViewById(R.id.button_newBus);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -32,9 +33,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        addBus.setOnClickListener(new View.OnClickListener(){
+        newBus.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
             }
         });
     }
@@ -64,14 +66,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void launch_jsonTest() {
-        Intent intent = new Intent(this, jsonTestingActivity.class);
-        startActivity(intent);
-    }
-
-    private void launch_backend() {
-        Intent intent = new Intent(this, backendActivity.class);
-        startActivity(intent);
-    }
-    
 }
