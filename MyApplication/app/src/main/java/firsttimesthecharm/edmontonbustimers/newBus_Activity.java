@@ -26,8 +26,8 @@ public class newBus_Activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        commitBus = (Button)findViewById(R.id.button_commitBus);
-        userBus = (EditText)findViewById(R.id.editText_userBus);
+        commitBus = (Button) findViewById(R.id.button_commitBus);
+        userBus = (EditText) findViewById(R.id.editText_userBus);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -56,5 +56,5 @@ public class newBus_Activity extends AppCompatActivity {
             }
         });
 
-
+    }
 }
