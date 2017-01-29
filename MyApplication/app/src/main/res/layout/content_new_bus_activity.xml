@@ -14,7 +14,8 @@
     tools:showIn="@layout/activity_add_bus_activity">
 
     <EditText
-        android:text="Bus Number..."
+        android:hint="Bus Number..."
+        android:textAlignment="center"
         android:layout_marginTop="120dp"
         android:imeOptions="actionDone"
         android:layout_width="130dp"
@@ -23,16 +24,22 @@
         android:id="@+id/editText_userBus"/>
 
     <EditText
-        android:text="Stop Number..."
+        android:hint="Stop Number..."
+        android:textAlignment="center"
+        android:inputType="text"
+        android:ems="10"
         android:layout_below="@id/editText_userBus"
         android:layout_width="130dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:id="@+id/editText_userStop"/>
+        android:id="@+id/editText_userStop"
+        android:singleLine="false" />
     <Button
-        android:text="A"
+        android:text="Add Bus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button_newBus"/>
+        android:layout_below="@id/editText_userStop"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button_commitBus"/>
 
 </RelativeLayout>

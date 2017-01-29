@@ -10,13 +10,12 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button jsonTest;
-    private Button backendTest;
     private Button newBus;
-
+    private Button commitBus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +24,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        jsonTest = (Button)findViewById(R.id.button_jsonTest);
-        backendTest = (Button)findViewById(R.id.button_backendTest);
         newBus = (Button)findViewById(R.id.button_newBus);
+        commitBus = (Button)findViewById(R.id.button_commitBus);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -38,23 +36,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        jsonTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launch_jsonTest();
-            }
-        });
-
-        backendTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launch_backend();
-            }
-        });
 
         newBus.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+            }
+        });
+
+        commitBus.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
             }
         });
     }
@@ -81,14 +72,5 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void launch_jsonTest() {
-        Intent intent = new Intent(this, jsonTestingActivity.class);
-        startActivity(intent);
-    }
-
-    private void launch_backend() {
-        Intent intent = new Intent(this, backendActivity.class);
-        startActivity(intent);
-    }
 
 }
