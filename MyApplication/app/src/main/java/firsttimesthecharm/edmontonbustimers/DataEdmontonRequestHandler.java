@@ -90,12 +90,14 @@ public class DataEdmontonRequestHandler {
                         System.err.println("[EBT Tag]: Next list item: " + dataEdmontonModel.arrival_time_2);
 
                         dataEdmontonModels.add(dataEdmontonModel);
+                        //make the result object
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 observer.callback(dataEdmontonModels);
+                //oversver.callback(resultarray)
             }
 
             @Override
