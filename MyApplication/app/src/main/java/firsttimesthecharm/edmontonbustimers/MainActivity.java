@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
             for(Result r : results) {
 
-                System.out.println(ur.get_busNum() + " " + ur.get_busStop() + " " + r.get_BusStop() + " " + r.get_BusNum());
+//                System.out.println(ur.get_busNum() + " " + ur.get_busStop() + " " + r.get_BusStop() + " " + r.get_BusNum());
                 if(ur.get_busStop().equals(r.get_BusStop()) &&
                         ur.get_busNum().equals(r.get_BusNum())) {
                     temp.add(r);
@@ -179,7 +179,28 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            finished.add(temp.get(0));
+            if (temp.size() > 0) {
+                Date currentTime = new Date(System.currentTimeMillis());
+                System.err.println("[EBT Tag]: ASDF");
+
+                for (Result result : temp) {
+//                    System.err.println(result.get_time());
+
+                    Date nextDate = result.get_time();
+                    nextDate.setYear(currentTime.getYear());
+                    nextDate.setDate(currentTime.getDate());
+                    nextDate.setMonth(currentTime.getMonth());
+
+                    if (nextDate.after(currentTime)) {
+                        finished.add(result);
+                        break;
+                    }
+                }
+
+                System.err.println("[EBT Tag]: No time found!!!!!");
+            } else {
+                System.err.println("[EBT Tag]: Result list size is zero");
+            }
         }
 
         return finished;
