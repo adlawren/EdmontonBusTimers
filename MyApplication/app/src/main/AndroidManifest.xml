@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="firsttimesthecharm.edmontonbustimers">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,9 +27,11 @@
         <activity
             android:name=".backendActivity"
             android:label="@string/title_activity_backend"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".addBus_activity"
+            android:label="@string/title_activity_add_bus_activity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
 </manifest>

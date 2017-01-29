@@ -38,18 +38,18 @@
         android:id="@+id/textView_LOGO"/>
 
     <Button
-        android:text="Add Bus"
+        android:text="New Bus"
         android:layout_below="@id/textView_LOGO"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:id="@+id/button_addBus"/>
+        android:id="@+id/button_newBus"/>
 
     <TextView
         android:text="Bus"
-        android:layout_below="@id/button_addBus"
+        android:layout_below="@id/button_newBus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/textView_Stop"
@@ -58,7 +58,7 @@
 
     <TextView
         android:text="Stop"
-        android:layout_below="@id/button_addBus"
+        android:layout_below="@id/button_newBus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -66,7 +66,7 @@
 
     <TextView
         android:text="ETA"
-        android:layout_below="@id/button_addBus"
+        android:layout_below="@id/button_newBus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/textView_Stop"
