@@ -46,8 +46,16 @@ public class newBus_Activity extends AppCompatActivity {
         commitBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(userBus.getText().toString().trim().equals("") ||
+                        userStop.getText().toString().trim().equals("")) {
+                    showToast("Field is empty!");
+                } else {
+                    busNumber = Integer.valueOf(userBus.getText().toString());
+                    stopNumber = Integer.valueOf(userStop.getText().toString());
+                }
                 if(busNumber == 0 || stopNumber == 0) {
-                    showToast("Field is empty.");
+                    showToast("Fields cannot be zero..");
                 } else {
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("busNum", busNumber);
@@ -63,10 +71,9 @@ public class newBus_Activity extends AppCompatActivity {
             public boolean onEditorAction(TextView textView, int actionID, KeyEvent keyEvent) {
                 boolean handled = false;
                 if (actionID == EditorInfo.IME_ACTION_NEXT) {
-                    busNumber = Integer.valueOf(userBus.getText().toString());
                     return false;
                 }
-                return false;
+                return true;
             }
         });
 
@@ -75,7 +82,6 @@ public class newBus_Activity extends AppCompatActivity {
             public boolean onEditorAction(TextView textView, int actionID, KeyEvent keyEvent) {
                 boolean handled = false;
                 if (actionID == EditorInfo.IME_ACTION_DONE) {
-                    stopNumber = Integer.valueOf(userStop.getText().toString());
                     return false;
                 }
                 return false;
