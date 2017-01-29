@@ -37,14 +37,26 @@ class DataEdmontonModel {
 }
 
 public class DataEdmontonRequestHandler {
-    void GetDataModels(final IObserver<ArrayList<DataEdmontonModel>> observer) {
+    private String buildRelativeUrl(ArrayList<Route> routeList) {
+        String relativeUrl = new String("resource/xeux-ngrz.json");
+
+        for (Route route : routeList) {
+            // ...
+        }
+
+        return relativeUrl;
+    }
+
+    void GetDataModels(final IObserver<ArrayList<DataEdmontonModel>> observer, ArrayList<Route> routeList) {
         RequestParams requestParams = new RequestParams();
         requestParams.put("$limit","5000");
         requestParams.put("$$app_token", "4C0rE9eFHXRU5cQdcR15gI1PJ");
 
         final ArrayList<DataEdmontonModel> dataEdmontonModels = new ArrayList<>();
 
-        DataEdmontonRestClient.get("resource/xeux-ngrz.json", requestParams, new AsyncHttpResponseHandler() {
+        String relativeUrl = buildRelativeUrl(routeList);
+
+        DataEdmontonRestClient.get(relativeUrl, requestParams, new AsyncHttpResponseHandler() {
             @Override
             public void onStart() {
                 // called before request is started
